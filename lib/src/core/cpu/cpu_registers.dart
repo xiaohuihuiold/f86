@@ -57,58 +57,84 @@ class CpuRegisters {
   final _flag = 0.rw(RW16Bit());
 
   /// 进位标志
-  late final c = _flag(RWIndexBit(CpuRegisterFlags.c.index));
+  late final c = _flag(RWIndexBit(CpuRegisterFlag.c.index));
 
   /// 奇偶标志
-  late final p = _flag(RWIndexBit(CpuRegisterFlags.p.index));
+  late final p = _flag(RWIndexBit(CpuRegisterFlag.p.index));
 
   /// 借位标志
-  late final a = _flag(RWIndexBit(CpuRegisterFlags.a.index));
+  late final a = _flag(RWIndexBit(CpuRegisterFlag.a.index));
 
   /// 零标志
-  late final z = _flag(RWIndexBit(CpuRegisterFlags.z.index));
+  late final z = _flag(RWIndexBit(CpuRegisterFlag.z.index));
 
   /// 符号标志
-  late final s = _flag(RWIndexBit(CpuRegisterFlags.s.index));
+  late final s = _flag(RWIndexBit(CpuRegisterFlag.s.index));
 
   /// 单步标志
-  late final t = _flag(RWIndexBit(CpuRegisterFlags.t.index));
+  late final t = _flag(RWIndexBit(CpuRegisterFlag.t.index));
 
   /// 中断标志
-  late final i = _flag(RWIndexBit(CpuRegisterFlags.i.index));
+  late final i = _flag(RWIndexBit(CpuRegisterFlag.i.index));
 
   /// 方向标志
-  late final d = _flag(RWIndexBit(CpuRegisterFlags.d.index));
+  late final d = _flag(RWIndexBit(CpuRegisterFlag.d.index));
 
   /// 溢出标志
-  late final o = _flag(RWIndexBit(CpuRegisterFlags.o.index));
+  late final o = _flag(RWIndexBit(CpuRegisterFlag.o.index));
 }
 
 /// 标志寄存器
-enum CpuRegisterFlags {
-  // 进位标志
-  c,
-  _r1,
-  // 奇偶标志
-  p,
-  _r3,
-  // 借位标志
-  a,
-  _r5,
-  // 零标志
-  z,
-  // 符号标志
-  s,
-  // 单步标志
-  t,
-  // 中断标志
-  i,
-  // 方向标志
-  d,
-  // 溢出标志
-  o,
-  _r12,
-  _r13,
-  _r14,
-  _r15,
+enum CpuRegisterFlag {
+  /// 进位标志
+  c('C'),
+
+  /// 保留位
+  _r1('_'),
+
+  /// 奇偶标志
+  p('P'),
+
+  /// 保留位
+  _r3('_'),
+
+  /// 借位标志
+  a('A'),
+
+  /// 保留位
+  _r5('_'),
+
+  /// 零标志
+  z('Z'),
+
+  /// 符号标志
+  s('S'),
+
+  /// 单步标志
+  t('T'),
+
+  /// 中断标志
+  i('I'),
+
+  /// 方向标志
+  d('D'),
+
+  /// 溢出标志
+  o('O'),
+
+  /// 保留位
+  _r12('_'),
+
+  /// 保留位
+  _r13('_'),
+
+  /// 保留位
+  _r14('_'),
+
+  /// 保留位
+  _r15('_');
+
+  final String name;
+
+  const CpuRegisterFlag(this.name);
 }
