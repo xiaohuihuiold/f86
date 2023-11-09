@@ -163,6 +163,30 @@ class CpuOpCode {
 /// | 110 | (mod=00 DS:[disp16]) SS:[BP+disp] | DH   | SI         |
 /// | 111 | DS:[BX+dip]                 | BH         | DI         |
 class CpuInstructionSets {
+  static CpuOpCode? getOp(int code, int subCode) {
+    var result = _codeMap[code];
+    if (result is List) {
+      result = result[subCode & 0x07];
+    }
+    return result as CpuOpCode?;
+  }
+
+  static final _codeMap = _generateCodeMap();
+
+  static List _generateCodeMap() {
+    final list = List<dynamic>.filled(0x100, null);
+    for (final code in _codes) {
+      final subCode = code.subCode;
+      if (subCode == null) {
+        list[code.code] = code;
+      } else {
+        list[code.code] ??= List<dynamic>.filled(0x08, null);
+        list[code.code]?[subCode] = code;
+      }
+    }
+    return list;
+  }
+
   static final _codes = [
     CpuOpCode(code: 0x00, op: CpuInstructionSet.add),
     CpuOpCode(code: 0x01, op: CpuInstructionSet.add),
