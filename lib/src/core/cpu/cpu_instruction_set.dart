@@ -163,17 +163,18 @@ class CpuOpCode {
 /// | 110 | (mod=00 DS:[disp16]) SS:[BP+disp] | DH   | SI         |
 /// | 111 | DS:[BX+dip]                 | BH         | DI         |
 class CpuInstructionSets {
+  /// 获取指令
   static CpuOpCode? getOp(int code, int subCode) {
-    var result = _codeMap[code];
+    var result = _codeTable[code];
     if (result is List) {
       result = result[subCode & 0x07];
     }
     return result as CpuOpCode?;
   }
 
-  static final _codeMap = _generateCodeMap();
+  static final _codeTable = _generateCodeTable();
 
-  static List _generateCodeMap() {
+  static List _generateCodeTable() {
     final list = List<dynamic>.filled(0x100, null);
     for (final code in _codes) {
       final subCode = code.subCode;

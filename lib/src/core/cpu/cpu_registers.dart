@@ -2,6 +2,25 @@ import 'package:f86/f86.dart';
 
 /// 寄存器
 class CpuRegisters {
+  /// 获取寄存器
+  ReaderWriter<int> getRegister(int reg, int w) {
+    return _registerTable[w][reg];
+  }
+
+  String getRegisterName(int reg, int w) {
+    return _registerNameTable[w][reg];
+  }
+
+  late final _registerTable = [
+    [al, cl, dl, bl, ah, ch, dh, bh],
+    [ax, cx, dx, bx, sp, bp, si, di],
+  ];
+
+  final _registerNameTable = [
+    ['AL', 'CL', 'DL', 'BL', 'AH', 'CH', 'DH', 'BH'],
+    ['AX', 'CX', 'DX', 'BX', 'SP', 'BP', 'SI', 'DI'],
+  ];
+
   /// 累加寄存器
   final ax = 0.rw(RW16Bit());
   late final ah = ax(RW16BitHigh());
